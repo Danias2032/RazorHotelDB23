@@ -1,0 +1,54 @@
+﻿@page
+@model RazorHotelDB23.Pages.Hotels.GetAllHotelsModel
+@{
+    ViewData["Title"] = "GetAllHotels";
+}
+
+<h1>Hotel side</h1>
+
+<form method="get">
+    Search <input type="text" ¨ asp-for="FilterCriteria" />
+    <input type="submit" value="Filter" />
+</form>
+<p>
+    <a asp-page="Create">Create a new Hotel</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Hotel No
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Hotels.Count() != 0)
+        {
+            @foreach (var item in Model.Hotels)
+            {
+                <tr>
+                    <td>
+                        @item.HotelNr
+                    </td>
+                    <td>
+                        @item.Navn
+                    </td>
+                    <td>
+                        @item.Adresse
+                    </td>
+                    <td>
+                        <a asp-page="UpdateHotel" asp-route-hotelnr="@item.HotelNr">Update</a> |
+                        <a asp-page="DeleteHotel" asp-route-hotelnr="@item.HotelNr">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
